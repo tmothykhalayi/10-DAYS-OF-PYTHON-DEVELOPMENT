@@ -1,7 +1,5 @@
 from django.contrib import admin
+from .models import Post  # Import the Post model
 
-# Register your models here.
-from django.contrib import admin
-from .models import Post
-
+# Register the Post model so it appears in the admin panel
 admin.site.register(Post)

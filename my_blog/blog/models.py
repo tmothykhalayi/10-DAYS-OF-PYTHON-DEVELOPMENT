@@ -1,15 +1,17 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
+from django.contrib.auth.models import User
+from django.urls import reverse  # Import reverse for URL generation
 
 class Post(models.Model):
-    title = models.CharField(max_length=200)  # Title of the post
-    content = models.TextField()  # Content of the post
-    author = models.CharField(max_length=100)  # Author of the post
-    created_at = models.DateTimeField(auto_now_add=True)  # Auto-set when the post is created
-    updated_at = models.DateTimeField(auto_now=True)  # Auto-set when the post is updated
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title  # When we print, show the title of the post
+        return self.title
 
+    # Add a method to get the URL for the post's detail view
+    def get_absolute_url(self):
+        return reverse('post_detail', args=[str(self.id)])

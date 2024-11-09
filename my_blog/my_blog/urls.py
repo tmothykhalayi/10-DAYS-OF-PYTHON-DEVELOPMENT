@@ -20,3 +20,12 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.post_list, name='post_list'),  # This is your homepage to show posts
+]
+urlpatterns = [
+    path('post/<int:post_id>/', views.post_detail, name='post_detail'),
+]

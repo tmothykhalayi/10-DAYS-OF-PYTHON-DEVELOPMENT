@@ -16,14 +16,11 @@ Including another URLconf
 """
 # my_blog/urls.py
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include  # Include is needed for the blog app URLs
 from blog import views  # Make sure to import your views from the blog app
 
 urlpatterns = [
-    path('admin/', admin.site.urls),           # Admin panel URL
+    path('admin/', admin.site.urls),  # Admin panel URL
     path('', views.post_list, name='post_list'),  # Homepage to show posts
-]
-urlpatterns = [
-    path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),  # Include blog app URLs
 ]

@@ -1,17 +1,10 @@
-# blog/models.py
-from django.db import models
-from django.contrib.auth.models import User
+from django.shortcuts import render, get_object_or_404
+from .models import Post
 
-class Post(models.Model):
-    title = models.CharField(max_length=200)
-    content = models.TextField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+def post_list(request):
+    posts = Post.objects.all().order_by('-created_at')  # Get all posts ordered by creation date
+    return render(request, 'blog/post_list.html', {'posts': posts})
 
-    
 def post_detail(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
+    post = get_object_or_404(Post, id=post_id)  # Get post or 404 if not found
     return render(request, 'post_detail.html', {'post': post})
-def __str__(self):
-        return self.title

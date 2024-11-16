@@ -1,4 +1,3 @@
-<!-- blog/templates/blog/post_list.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,15 +9,12 @@
      <!-- Link to go back to the homepage -->
      <p><a href="{% url 'post_list' %}">← Back to all posts</a></p>
 
-     <h1>{{ post.title }}</h1>
-     <p>{{ post.content }}</p>
-     <p><em>By {{ post.author }} on {{ post.creat
-    <h1>Blog Posts</h1>
-    <ul>
+     <h1>Blog Posts</h1>
+     <ul>
         {% for post in posts %}
             <li>
-                <h2>{{ post.title }}</h2>
-                <p>{{ post.content }}</p>
+                <h2><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h2>
+                <p>{{ post.content|slice:":200" }}...</p> <!-- Optionally slice the content to limit the length -->
                 <p><em>By {{ post.author }} on {{ post.created_at }}</em></p>
             </li>
         {% empty %}
